@@ -20,11 +20,10 @@ var Profesores = /** @class */ (function () {
     return Profesores;
 }());
 var Alumnos = /** @class */ (function () {
-    function Alumnos(paramNombreAlumno, paramNotaExamen, paramInformarNota, paramAprobadoDesaprobado) {
+    function Alumnos(paramNombreAlumno, paramNotaExamen) {
         this.nombreAlumno = paramNombreAlumno;
         this.notaExamen = paramNotaExamen;
-        this.informarNota = paramInformarNota;
-        this.aprobadoDesaprobado = paramAprobadoDesaprobado;
+        // this.aprobadoDesaprobado = paramAprobadoDesaprobado;
     }
     Alumnos.prototype.getNombreAlumno = function () {
         return this.nombreAlumno;
@@ -32,27 +31,19 @@ var Alumnos = /** @class */ (function () {
     Alumnos.prototype.getNotaExamen = function () {
         return this.notaExamen;
     };
-    Alumnos.prototype.informnarNota = function () {
-        if (this.informarNota === true) {
-            this.informarNota = false;
-        }
-        else {
-            this.informarNota = true;
-        }
-    };
     Alumnos.prototype.getAprobadoDesaprobado = function () {
-        if (this.aprobadoDesaprobado === true) {
-            this.aprobadoDesaprobado = false;
+        if (this.notaExamen >= 7) {
+            return "Aprobado";
         }
         else {
-            this.aprobadoDesaprobado = true;
+            return "Desaprobado";
         }
     };
     return Alumnos;
 }());
-var alumno1 = new Alumnos("Pedro", 9, true, true);
-var alumno2 = new Alumnos("Juan", 7, false, true);
-var alumno3 = new Alumnos("Lucas", 3, false, false);
+var alumno1 = new Alumnos("Pedro", 9);
+var alumno2 = new Alumnos("Juan", 7);
+var alumno3 = new Alumnos("Lucas", 3);
 var alumnos = [alumno1, alumno2, alumno3];
 var profesor1 = new Profesores("Alcides", alumnos);
 var profesor2 = new Profesores("Evaristo", alumnos);
@@ -69,3 +60,4 @@ for (var i = 0; i < 3; i++) {
     console.log(alumnos[i].getNombreAlumno());
 }
 console.log("Informe: ", alumnos[1].getNombreAlumno(), "Nota: ", alumnos[1].getNotaExamen(), alumnos[1].getAprobadoDesaprobado());
+console.log("Informe: ", alumnos[2].getNombreAlumno(), "Nota: ", alumnos[2].getNotaExamen(), alumnos[2].getAprobadoDesaprobado());

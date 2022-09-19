@@ -32,13 +32,10 @@ class Alumnos{
     public nombreAlumno: string;
     public notaExamen: number;
     public aprobadoDesaprobado: boolean;
-    public informarNota: boolean
 
-    public constructor(paramNombreAlumno: string, paramNotaExamen: number, paramInformarNota: boolean, paramAprobadoDesaprobado: boolean){
+    public constructor(paramNombreAlumno: string, paramNotaExamen: number){
         this.nombreAlumno = paramNombreAlumno;
         this.notaExamen = paramNotaExamen;
-        this.informarNota = paramInformarNota;
-        this.aprobadoDesaprobado = paramAprobadoDesaprobado;
     }
 
     public getNombreAlumno(): string{
@@ -49,26 +46,18 @@ class Alumnos{
         return this.notaExamen;
     }
 
-    public informnarNota(): void{
-        if(this.informarNota === true){
-            this.informarNota = false;
+    public getAprobadoDesaprobado(): string{
+        if(this.notaExamen >= 7){
+            return "Aprobado";
         }else{
-            this.informarNota = true;
-        }
-    }
-
-    public getAprobadoDesaprobado(): void{
-        if(this.aprobadoDesaprobado === true){
-            this.aprobadoDesaprobado = false;
-        }else{
-            this.aprobadoDesaprobado = true;
+            return "Desaprobado";
         }
     }
 }
 
-let alumno1: Alumnos = new Alumnos("Pedro", 9, true, true);
-let alumno2: Alumnos = new Alumnos("Juan", 7, false, true);
-let alumno3: Alumnos = new Alumnos("Lucas", 3, false, false);
+let alumno1: Alumnos = new Alumnos("Pedro", 9);
+let alumno2: Alumnos = new Alumnos("Juan", 7);
+let alumno3: Alumnos = new Alumnos("Lucas", 3);
 let alumnos: Alumnos[] = [alumno1, alumno2, alumno3];
 
 let profesor1: Profesores = new Profesores("Alcides", alumnos);
@@ -92,3 +81,4 @@ for(let i = 0; i < 3; i++){
 }
 
 console.log("Informe: ", alumnos[1].getNombreAlumno(), "Nota: ", alumnos[1].getNotaExamen(), alumnos[1].getAprobadoDesaprobado());
+console.log("Informe: ", alumnos[2].getNombreAlumno(), "Nota: ", alumnos[2].getNotaExamen(), alumnos[2].getAprobadoDesaprobado());
