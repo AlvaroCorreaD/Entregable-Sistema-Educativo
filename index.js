@@ -53,7 +53,7 @@ var Alumnos = /** @class */ (function () {
             return "Matriculado.";
         }
         if (this.informarNota === false && this.notaExamen >= 7) {
-            return " y explusado por no informar su nota.";
+            return "y explusado por no informar su nota.";
         }
         else {
             return "y debe informar su nota en tiempo y forma.";
