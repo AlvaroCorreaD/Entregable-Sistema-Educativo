@@ -16,15 +16,25 @@ class Escuela{
 
 class Profesores{
     public nombreProfesor: string;
+    public profesorTieneListado: boolean;
     public listadoAlumnos: Alumnos[];
 
-    public constructor(paramNombreProfesor: string,paramListAlum: Alumnos[]){
+    public constructor(paramNombreProfesor: string,paramProfListYN: boolean, paramListAlum: Alumnos[]){
         this.nombreProfesor = paramNombreProfesor;
+        this.profesorTieneListado = paramProfListYN
         this.listadoAlumnos = paramListAlum;
     }
 
     public getNombreProfesor(): string{
         return this.nombreProfesor;
+    }
+
+    public contratarDespedirProfesor(): string{
+        if(this.profesorTieneListado === true){
+            return "Contratado.";
+        }else{
+            return "Despedido por no tener listado de alumnos.";
+        }
     }
 }
 
@@ -32,10 +42,12 @@ class Alumnos{
     public nombreAlumno: string;
     public notaExamen: number;
     public aprobadoDesaprobado: boolean;
+    public informarNota: boolean;
 
-    public constructor(paramNombreAlumno: string, paramNotaExamen: number){
+    public constructor(paramNombreAlumno: string, paramNotaExamen: number,paramInformNota: boolean){
         this.nombreAlumno = paramNombreAlumno;
         this.notaExamen = paramNotaExamen;
+        this.informarNota = paramInformNota;
     }
 
     public getNombreAlumno(): string{
@@ -50,35 +62,42 @@ class Alumnos{
         if(this.notaExamen >= 7){
             return "Aprobado";
         }else{
-            return "Desaprobado";
+            return "Desaprobado, a recuperatorio";
+        }
+    }
+
+    public matricularAlumno(): string{
+        while(this.informarNota === true && this.notaExamen >= 7){
+            return "Matriculado.";
+        }if(this.informarNota === false && this.notaExamen >= 7){
+            return " y explusado por no informar su nota.";
+        }else{
+            return "y debe informar su nota en tiempo y forma.";
         }
     }
 }
 
-let alumno1: Alumnos = new Alumnos("Pedro", 9);
-let alumno2: Alumnos = new Alumnos("Juan", 7);
-let alumno3: Alumnos = new Alumnos("Lucas", 3);
+let alumno1: Alumnos = new Alumnos("Pedro", 9, true);
+let alumno2: Alumnos = new Alumnos("Juan", 7, false);
+let alumno3: Alumnos = new Alumnos("Lucas", 3, true);
 let alumnos: Alumnos[] = [alumno1, alumno2, alumno3];
 
-let profesor1: Profesores = new Profesores("Alcides", alumnos);
-let profesor2: Profesores = new Profesores("Evaristo", alumnos);
-let profesor3: Profesores = new Profesores("Ismael", alumnos);
+let profesor1: Profesores = new Profesores("Alcides",true, alumnos);
+let profesor2: Profesores = new Profesores("Evaristo",false, alumnos);
+let profesor3: Profesores = new Profesores("Ismael",true ,alumnos);
 let profesores: Profesores[] = [profesor1, profesor2, profesor3];
 
 let escuela1: Escuela = new Escuela("N° 39 'Mirador de los Andes'", profesores, alumnos);
 
-console.log("Escuela: ", escuela1.getNombreEscuela());
-console.log("Profesores: ");
+console.log("Escuela:", escuela1.getNombreEscuela());
+console.log("Profesores:");
 
 for(let i = 0; i < 3; i++){
-    console.log(profesores[i].getNombreProfesor());
+    console.log(profesores[i].getNombreProfesor(), ":", profesores[i].contratarDespedirProfesor());
 }
 
-console.log("Alumnos: ")
+console.log("Alumnos:")
 
 for(let i = 0; i < 3; i++){
-    console.log(alumnos[i].getNombreAlumno());
+    console.log(alumnos[i].getNombreAlumno(), ":", "Nota:", alumnos[i].getNotaExamen(), alumnos[i].getAprobadoDesaprobado(), alumnos[i].matricularAlumno());
 }
-
-console.log("Informe: ", alumnos[1].getNombreAlumno(), "Nota: ", alumnos[1].getNotaExamen(), alumnos[1].getAprobadoDesaprobado());
-console.log("Informe: ", alumnos[2].getNombreAlumno(), "Nota: ", alumnos[2].getNotaExamen(), alumnos[2].getAprobadoDesaprobado());
