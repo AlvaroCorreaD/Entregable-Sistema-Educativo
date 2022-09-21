@@ -20,10 +20,10 @@ var Profesores = /** @class */ (function () {
     };
     Profesores.prototype.contratarDespedirProfesor = function () {
         if (this.profesorTieneListado === true) {
-            return "Contratado";
+            return "Contratado.";
         }
         else {
-            return "Despedido por no tener listado de alumnos";
+            return "Despedido por no tener listado de alumnos.";
         }
     };
     return Profesores;
@@ -50,13 +50,13 @@ var Alumnos = /** @class */ (function () {
     };
     Alumnos.prototype.matricularAlumno = function () {
         while (this.informarNota === true && this.notaExamen >= 7) {
-            return "Matriculado";
+            return "Matriculado.";
         }
         if (this.informarNota === false && this.notaExamen >= 7) {
-            return " y explusado por no informar su nota";
+            return " y explusado por no informar su nota.";
         }
         else {
-            return "y debe informar su nota en tiempo y forma";
+            return "y debe informar su nota en tiempo y forma.";
         }
     };
     return Alumnos;
